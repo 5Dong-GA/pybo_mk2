@@ -4,13 +4,12 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q, Count
 from ..models import Question
 import logging
-logger = logging.getLogger('pybo')
+
 
 def index(request):
     """
     pybo 목록 출력
     """
-    logger.info("INFO 레벨로 출력")
     # 입력 파라미터
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
@@ -21,6 +20,8 @@ def index(request):
         question_list = Question.objects.annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_date')
     elif so == 'popular':
         question_list = Question.objects.annotate(num_answer=Count('answer')).order_by('-num_answer', '-create_date')
+    elif so == 'view':
+        question_list = Question.objects.order_by('-view', '-create_date')
     else:  # recent
         question_list = Question.objects.order_by('-create_date')
 

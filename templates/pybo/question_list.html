@@ -8,6 +8,7 @@
                 <option value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
                 <option value="recommend" {% if so == 'recommend' %}selected{% endif %}>추천순</option>
                 <option value="popular" {% if so == 'popular' %}selected{% endif %}>인기순</option>
+                <option value="view" {% if so == 'view' %}selected{% endif %}>조회순</option>
             </select>
         </div>
         <div class="col-4 input-group">
@@ -25,6 +26,7 @@
             <th style="width:50%">제목</th>
             <th>글쓴이</th>
             <th>작성일시</th>
+            <th>조회수</th>
         </tr>
         </thead>
         <tbody>
@@ -48,6 +50,7 @@
             </td>
             <td>{{ question.author.username }}</td> <!-- 글쓴이 추가 -->
             <td>{{ question.create_date }}</td>
+            <td>{{ question.view }}</td> <!-- 조회수 추가 -->
         </tr>
         {% endfor %}
         {% else %}
@@ -96,7 +99,7 @@
     </ul>
     <!-- 페이징처리 끝 -->
     <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
-</div>
+
 <form id="searchForm" method="get" action="{% url 'index' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">

@@ -12,6 +12,8 @@
         </ul>
         {% endfor %}
     </div>
+    {% else %}
+    {{ question.hit_view }}
     {% endif %}
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
     <div class="row my-3">
