@@ -99,7 +99,6 @@
     </ul>
     <!-- 페이징처리 끝 -->
     <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
-
 <form id="searchForm" method="get" action="{% url 'index' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">

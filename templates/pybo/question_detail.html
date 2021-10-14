@@ -39,7 +39,7 @@
                             <div>{{ question.create_date }}</div>
                         </div>
                     </div>
-                    {% if request.user == question.author %}
+                    {% if request.user == question.author or request.user.is_superuser %} <!-- ADMIN 이면 마음대로 삭제 가능 -->
                     <div class="my-3">
                         <a href="{% url 'pybo:question_modify' question.id  %}"
                            class="btn btn-sm btn-outline-secondary">수정</a>
@@ -51,7 +51,7 @@
                     {% if question.comment_set.count > 0 %}
                     <div class="mt-3">
                         {% for comment in question.comment_set.all %}  <!-- 등록한 댓글을 출력 -->
-                            <a name="comment_{{ comment.id }}"></a>
+                        <a name="comment_{{ comment.id }}"></a>
                         <div class="comment py-2 text-muted">  <!-- 댓글 각각에 comment 스타일 지정 -->
                             <span style="white-space: pre-line;">{{ comment.content }}</span>
                             <span>
@@ -60,7 +60,7 @@
                 (수정:{{ comment.modify_date }})
                 {% endif %}
             </span>
-                            {% if request.user == comment.author %}
+                            {% if request.user == comment.author or request.user.is_superuser %}
                             <a href="{% url 'pybo:comment_modify_question' comment.id  %}" class="small">수정</a>,
                             <a href="#" class="small delete"
                                data-uri="{% url 'pybo:comment_delete_question' comment.id  %}">삭제</a>
@@ -115,7 +115,7 @@
                     {% if answer.comment_set.count > 0 %}
                     <div class="mt-3">
                         {% for comment in answer.comment_set.all %}
-                            <a name="comment_{{ comment.id }}"></a>
+                        <a name="comment_{{ comment.id }}"></a>
                         <div class="comment py-2 text-muted">
                             <span style="white-space: pre-line;">{{ comment.content }}</span>
                             <span>
@@ -176,9 +176,5 @@ $(document).ready(function(){
         }
     });
 });
-
-
-
-
 </script>
 {% endblock %}
