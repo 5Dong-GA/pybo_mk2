@@ -42,10 +42,33 @@ def index(request):
     return render(request, 'pybo/question_list.html', context)
 
 
+# def detail(request, question_id):
+#     """
+#     pybo 내용 출력
+#     """
+#     question = get_object_or_404(Question, pk=question_id)
+#     context = {'question': question}
+#     return render(request, 'pybo/question_detail.html', context)
+
 def detail(request, question_id):
-    """
-    pybo 내용 출력
-    """
     question = get_object_or_404(Question, pk=question_id)
-    context = {'question': question}
+
+    # 입력 파라미터
+    page = request.GET.get('page', '1')
+    so = request.GET.get('so', 'recent')  # 정렬기준
+
+    if so == 'recent':
+        answer_list = Answer.objects.filter(question=question).order_by('-create_date')
+    elif so == 'recommend':
+        answer_list = Answer.objects.filter(question=question).annotate(
+            num_voter=Count('voter')).order_by('-num_voter', '-create_date')
+    else:
+        answer_list = Answer.objects.filter(question=question).annotate(
+            num_comment=Count('comment')).order_by('-num_comment', '-create_date')
+
+    # 페이징
+    paginator = Paginator(answer_list, 3)
+    page_obj = paginator.get_page(page)
+
+    context = {'question': question, 'answer_list': page_obj, 'page':page, 'so':so}
     return render(request, 'pybo/question_detail.html', context)
