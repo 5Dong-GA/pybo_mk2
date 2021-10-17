@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['52.79.33.28']
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
     'django.contrib.admin',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
