@@ -3,7 +3,7 @@ from .models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    search_fields = ['bio']
+    search_fields = ['profile_name', 'bio']
 
 
 admin.site.register(Profile, ProfileAdmin)

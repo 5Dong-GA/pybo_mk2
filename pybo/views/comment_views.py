@@ -125,3 +125,15 @@ def comment_delete_answer(request, comment_id):
     else:
         comment.delete()
     return redirect('pybo:detail', question_id=comment.answer.question.id)
+
+
+@login_required(login_url='common:login')
+def go_to_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.answer is None:
+        return redirect('{}#comment_{}'.format(
+            resolve_url('pybo:detail', question_id=comment.question.id), comment.id))
+    else:
+        return redirect('{}#comment_{}'.format(
+            resolve_url('pybo:detail', question_id=comment.answer.question.id), comment.id))

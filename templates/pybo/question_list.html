@@ -48,7 +48,9 @@
                 <span class="text-danger small ml-2">{{ question.answer_set.count }}</span>
                 {% endif %}
             </td>
-            <td>{{ question.author.username }}</td> <!-- 글쓴이 추가 -->
+            <td>
+                <a href="{% url 'pybo:author_activity' question.author.id %}">{{ question.author.username }}</a>
+            </td> <!-- 글쓴이 추가 -->
             <td>{{ question.create_date }}</td>
             <td>{{ question.view }}</td> <!-- 조회수 추가 -->
         </tr>

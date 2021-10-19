@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
+    profile_name = models.CharField(default='', max_length=20)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

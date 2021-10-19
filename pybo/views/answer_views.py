@@ -65,3 +65,11 @@ def answer_delete(request, answer_id):
     else:
         answer.delete()
     return redirect('pybo:detail', question_id=answer.question.id)
+
+
+@login_required(login_url='common:login')
+def go_to_answer(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+
+    return redirect('{}#answer_{}'.format(
+        resolve_url('pybo:detail', question_id=answer.question.id), answer.id))

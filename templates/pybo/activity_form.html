@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="text-center thead-dark">
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td align="center">
+            <table>
+                {% if question_list %}
+                {% for question in question_list %}
+                <tr class="text-center">
+                    <td>
+                        <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }} ({{ question.create_date}})</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr class="text-center"> question이 없습니다.</tr>
+                {% endif %}
+            </table>
+        </td>
+        <td align="center">
+            <table>
+                {% if answer_list %}
+                {% for answer in answer_list %}
+                <tr class="text-center">
+                    <td>
+                        <a href="{% url 'pybo:go_to_answer' answer.id %}">{{ answer.content }} ({{answer.create_date}})</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr class="text-center"> answer이 없습니다.</tr>
+                {% endif %}
+            </table>
+        </td>
+        <td align="center">
+            <table>
+                {% if comment_list %}
+                {% for comment in comment_list %}
+                <tr class="text-center">
+                    <td>
+                        <a href="{% url 'pybo:go_to_comment' comment.id%}">{{ comment.content }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr class="text-center"> comment가 없습니다.</tr>
+                {% endif %}
+            </table>
+        </td>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
