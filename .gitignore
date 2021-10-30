@@ -5,3 +5,4 @@ __pycache__
 logs
 *.png
 *.jpg
+/config/settings/base.py
