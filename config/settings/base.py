@@ -34,12 +34,19 @@ AUTHENTICATION_BACKENDS = [
 
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+
+    # social-auth-app-django package
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 INSTALLED_APPS = [
     'crispy_forms',
+    'social_django',
+
     'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -147,6 +154,12 @@ LOGIN_REDIRECT_URL = '/'
 
 # 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '552918539016-cq19sh1cf56odpcv1uatoordhsv32orn.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 # 로깅설정
 LOGGING = {
