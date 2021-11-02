@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto">
+    <div class="row">Question
+        <div class="col-sm-12 col-md-12 col-lg-3 pb-4">
+            <div class="card p-4">
+                {% if question_list %}
+                {% for question in question_list %}
+                    <td class="text-left">
+                        {{ question.subject }}
+                    </td>
+                {% endfor %}
+                {% else %}
+            </div>
+        </div>
+    </div>
+    <div class="row">Answer
+        <div class="col-sm-12 col-md-12 col-lg-3 pb-4">
+            <div class="card p-4">
+                {% if answer_list %}
+                {% for answer in answer_list %}
+                    <td class="text-left">
+                        {{ answer.content }}
+                    </td>
+                {% endfor %}
+                {% else %}
+            </div>
+        </div>
+    </div>
+    <div class="row">Comment
+        <div class="col-sm-12 col-md-12 col-lg-3 pb-4">
+            <div class="card p-4">
+                {% if comment_list %}
+                {% for comment in comment_list %}
+                    <td class="text-left">
+                        {{ comment.content }}
+                    </td>
+                {% endfor %}
+                {% else %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
